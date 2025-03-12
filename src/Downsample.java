@@ -25,12 +25,10 @@ public class Downsample {
     }
 
     public static DImage processImage(DImage img, int radius) {
-        short[][] r = sampleChannel(img.getRedChannel(), radius);
-        short[][] g = sampleChannel(img.getGreenChannel(), radius);
-        short[][] b = sampleChannel(img.getBlueChannel(), radius);
+        short[][] c = sampleChannel(img.getBWPixelGrid(), radius);
 
-        DImage downsampled = new DImage(r[0].length, r.length);
-        downsampled.setColorChannels(r, g, b);
+        DImage downsampled = new DImage(c[0].length, c.length);
+        downsampled.setPixels(c);
         return downsampled;
     }
 }

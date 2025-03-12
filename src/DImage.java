@@ -1,3 +1,5 @@
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -570,6 +572,17 @@ public class DImage {
 
     public void setColorChannels(ColorComponents2d channels) {
         this.setPixels(DImage.combineColorComponents(channels));
+    }
+
+    public Mat toMat() {
+        short[][] colors = this.getBWPixelGrid();
+        Mat mat = new Mat(colors.length, colors[0].length, CvType.CV_8UC1);
+        for (int i = 0; i < colors.length; i++) {
+            for (int j = 0; j < colors[i].length; j++) {
+                mat.put(i, j, colors[i][j]);
+            }
+        }
+        return mat;
     }
 
     // Data transfer object
